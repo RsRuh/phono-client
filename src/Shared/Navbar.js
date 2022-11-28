@@ -1,0 +1,87 @@
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import logo from '../assets/logo.png'
+import { AuthContext } from '../contexts/AuthProvider';
+import useUserRole from '../hooks/useUserRole';
+const Navbar = () => {
+
+    const { user, logout } = useContext(AuthContext);
+
+    const [getRole, isUserLoading] = useUserRole(user?.email)
+
+
+    return (
+        <div className="bg-blue-500 md:border md:rounded-md md:w-[1255px]">
+            <nav className="relative px-4 md:py-4 flex justify-between items-center bg-white">
+                <Link to='/'>
+                    <img src={logo} className='w-[90px]' alt="" />
+                </Link>
+                <ul className="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto lg:items-center lg:w-auto lg:space-x-6">
+
+                    <li><Link className="text-sm text-black font-bold hover:text-blue-500" to="/">Home</Link></li>
+
+                    {getRole !== 'Buyer' &&
+                        <>
+                            <li className="text-gray-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" className="w-4 h-4 current-fill" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+                                </svg>
+                            </li>
+                            <li><Link className="text-sm text-black font-bold hover:text-blue-500" to="/dashboard">Dashboard</Link></li>
+                        </>
+                    }
+                    
+                    { getRole === 'Buyer' &&
+                        <>
+                            <li className="text-gray-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" className="w-4 h-4 current-fill" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+                                </svg>
+                            </li>
+                            <li><Link className="text-sm text-black font-bold hover:text-blue-500" to="/my-wishlist">My WishList</Link></li>
+                            <li className="text-gray-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" className="w-4 h-4 current-fill" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+                                </svg>
+                            </li>
+                            <li><Link className="text-sm text-black font-bold hover:text-blue-500" to="/my-order">My Orders</Link></li>
+                        </>
+                    }
+                    <li className="text-gray-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" className="w-4 h-4 current-fill" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+                        </svg>
+                    </li>
+                    <li><Link className="text-sm text-black font-bold hover:text-blue-500" to="/blog">Blog</Link></li>
+                    <li className="text-gray-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" className="w-4 h-4 current-fill" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+                        </svg>
+                    </li>
+                    <li><Link className="text-sm text-black font-bold hover:text-blue-500" to="/my-order">Personal</Link></li>
+                </ul>
+
+                {
+                    user?.uid ?
+                        <>
+                            <div className="flex items-center gap-5">
+                                <img src={user?.photoURL} alt="" className="object-cover object-center w-8 h-8 rounded-full shadow-sm" />
+                                <div>
+                                    <h2 className=" font-semibold leading-none">{user?.displayName}</h2>
+                                </div>
+                                <button className="btn btn-outline text-sm btn-sm hidden md:block" onClick={logout}>Log Out</button>
+                            </div>
+                        </> :
+                        <>
+                            <Link className="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold  rounded-xl transition duration-200" to="/sign-in">Sign In</Link>
+                            <Link className="hidden lg:inline-block py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200" to="sign-up">Sign up</Link>
+                        </>
+                }
+
+            </nav>
+        </div>
+
+    );
+};
+
+export default Navbar;
