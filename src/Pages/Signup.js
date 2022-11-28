@@ -52,7 +52,9 @@ const SignupBuyers = () => {
                             .then((result) => {
                                 const user = result.user;
                                 updateUserProfile(data.name, imageData.data.display_url)
-                                    .then(() => {  }).catch((error) => { });
+                                    .then(() => { 
+                                        window.location.reload()
+                                     }).catch((error) => { });
                             })
                             .catch((error) => {
                                 console.error(error);

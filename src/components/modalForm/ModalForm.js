@@ -49,7 +49,7 @@ const ModalForm = ({ productInfo }) => {
             .then(res => res.json())
             .then(mobiles => {
                 // console.log(mobiles);
-                toast.success('Purchase successfully')
+                toast.success('Added to Book, Please Checkout to buy')
                 form.reset();
             })
             .catch((error) => {
@@ -79,7 +79,7 @@ const ModalForm = ({ productInfo }) => {
             <div className="modal">
                 <div className="modal-box w-11/12 max-w-5xl">
                     <section>
-                        <h1 className="sr-only">Checkout</h1>
+                        <h1 className="sr-only">Add to Book</h1>
 
                         <div className="relative mx-auto max-w-screen-2xl">
                             <div className="grid grid-cols-1 md:grid-cols-2">

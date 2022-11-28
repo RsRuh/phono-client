@@ -1,31 +1,29 @@
-import { useQuery } from '@tanstack/react-query';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../contexts/AuthProvider';
+import axios from 'axios';
 
 const AllBuyers = () => {
 
     const { user } = useContext(AuthContext);
-    const url = `http://localhost:5000/get-buyers?email=${user?.email}`;
 
-    const { data: buyers = [], refetch } = useQuery({
-        queryKey: ['buyers', user?.email],
-        queryFn: async () => {
-            const res = await fetch(url, {
-                headers: {
-                    authorization: `bearer ${localStorage.getItem('accessToken')}`
-                }
-            });
-            const data = await res.json();
-            return data;
-        }
-    })
+    const [buyers ,setBuyers]=useState([])
+
+    useEffect(() =>{
+        axios.get(`http://localhost:5000/get-buyers?email=${user?.email}`,{
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+        .then(data => setBuyers(data.data))
+    }, [user?.email]);
 
     // console.log(buyers);
 
-
     return (
+        
         <section className="antialiased bg-gray-100 text-gray-600 px-4">
-            <div className="flex flex-col justify-center">
+            {   buyers.length > 0 ?
+                <div className="flex flex-col justify-center">
                 <div className="w-full mx-auto bg-white shadow-lg  rounded-sm border border-gray-200">
                     <header className="px-5 py-4 border-b border-gray-100">
                         <h2 className="font-semibold text-gray-800">Customers</h2>
@@ -86,6 +84,9 @@ const AllBuyers = () => {
                     </div>
                 </div>
             </div>
+            :
+                <p className="md:text-4xl text-center my-20">Opps You Have no Customer, Please Add some more product</p>
+            }
         </section>
     );
 };

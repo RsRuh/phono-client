@@ -21,7 +21,7 @@ const AddAProduct = () => {
     let minute = today.getMinutes()
     // console.log(hours, minute, second);
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
     let randomNumber = Math.floor(Math.random() * 10000000);
 
@@ -72,6 +72,7 @@ const AddAProduct = () => {
                 })
                     .then(res => res.json())
                     .then(mobiles => {
+                        reset()
                         console.log(mobiles);
                         toast.success('added successfully')
                     })

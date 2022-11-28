@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthProvider';
@@ -7,14 +7,21 @@ import useToken from '../hooks/useToken';
 const Signin = () => {
 
     const location = useLocation();
+
     const from = location.state?.from?.pathname || '/';
     const navigate = useNavigate();
+
     const [userEmail, setUserEmail] = useState('')
     const [token] = useToken(userEmail)
 
-    if (token) {
-        navigate(from, { replace: true })
-    }
+    console.log(from);
+
+    useEffect(() =>{
+        if(token){
+            navigate(from, { replace: true })
+        }
+    }, [token, from, navigate]);
+
 
 
     const { signin, signInWithGoogle } = useContext(AuthContext);
@@ -27,6 +34,7 @@ const Signin = () => {
             .then((userData) => {
                 const user = userData.user;
                 setUserEmail(user.email)
+                // window.location.reload();
             })
             .catch((error) => {
                 console.error(error);
