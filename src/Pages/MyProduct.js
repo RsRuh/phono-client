@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import ListCard from '../components/ListCard/ListCard';
@@ -52,9 +52,12 @@ const MyProduct = () => {
         .then(data => {
             if(data.modifiedCount > 0){
                 toast.success('Ads Added Successfully')
+              
                 refetch()
             }
         })
+        
+
     }
 
 
@@ -71,6 +74,7 @@ const MyProduct = () => {
                                     handleDeleteProduct={handleDeleteProduct}
                                     key={product._id}
                                     handleAds={handleAds}
+                                    
                                 ></ListCard>)
                             }
                         </>

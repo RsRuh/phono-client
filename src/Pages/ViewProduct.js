@@ -8,48 +8,47 @@ import ModalForm from '../components/modalForm/ModalForm';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../contexts/AuthProvider';
 import Loading from '../components/Loading/Loading';
+import { MdVerified } from "react-icons/md";
 
 const ViewProduct = () => {
 
     const mobiles = useLoaderData();
-    // console.log(mobiles);
+    console.log(mobiles);
 
     const { user, loading } = useContext(AuthContext);
 
 
     const handleWishList = event => {
-     
+
 
         const { sellingPrice, _id, productNumber } = event;
 
         const favInfo = {
 
             sellingPrice,
-            favEmail : user?.email,
-            favProductId : _id,
+            favEmail: user?.email,
+            favProductId: _id,
             productNumber
         }
 
 
 
-            fetch('http://localhost:5000/wishlist', {
-                method: 'POST',
-                headers: {
-        'content-type': 'application/json'
-                },
-                body: JSON.stringify(favInfo)
+        fetch('http://localhost:5000/wishlist', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(favInfo)
+        })
+            .then(res => res.json())
+            .then(phns => {
+                toast.success('Wish Added Successfully')
             })
-                .then(res => res.json())
-                .then(phns => {
-                    toast.success('Wish Added Successfully')
-                })
-                .catch((error) => {
-                    console.error(error);
-                });
+            .catch((error) => {
+                console.error(error);
+            });
 
     }
-
-
 
 
     const [productInfo, setProductInfo] = useState({})
@@ -84,7 +83,13 @@ const ViewProduct = () => {
                         <div className="flex items-center space-x-2">
                             <img src={mobile?.userPhoto} alt="" className="object-cover object-center w-8 h-8 rounded-full shadow-sm" />
                             <div className="-space-y-1">
-                                <h2 className="text-sm font-semibold leading-none">{mobile?.sellerName}</h2>
+                                <div className='flex'>
+                                    <h2 className="text-sm pr-1 font-semibold leading-none">{mobile?.sellerName}</h2>
+                                    {
+                                        mobile?.tik === true && <MdVerified className="w-4 h-4 text-blue-500" />
+                                    }
+
+                                </div>
                                 <span className="inline-block text-xs leading-none">{mobile?.sellerNumber}</span>
                             </div>
                         </div>
@@ -132,7 +137,7 @@ const ViewProduct = () => {
 						</button> */}
 
                             <button
-                                onClick={()=>handleWishList(mobile)}
+                                onClick={() => handleWishList(mobile)}
                                 className="relative flex items-center font-medium text-indigo-600 before:absolute text-sm md:text-md before:-bottom-1 before:h-1 before:w-full before:origin-right before:scale-x-0 before:bg-indigo-600 before:transition hover:before:scale-100"
                             >
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-4 h-4 fill-current">

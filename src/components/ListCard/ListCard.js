@@ -30,13 +30,11 @@ const ListCard = ({ product, handleDeleteProduct, handleAds }) => {
 
                         <div className="space-y-1">
                             <h3 className="text-lg font-semibold leading-snug sm:pr-8">{productName}</h3>
+                            
                             { getRole === "Seller" && !user.verified &&
                                 <button onClick={() => handleAds(_id)} className='flex items-center p-1 rounded text-black bg-violet-400 gap-1 text-sm'><SiGoogleads />Ads</button>
                             }
-                            {
-                                getRole === "Buyer" && user.verified && <button className='flex items-center p-1 rounded text-black bg-green-500 gap-1 text-sm'><SiGoogleadsense />Added</button>
-                            }
-
+                         
                            {
                                 getRole === "Buyer" && !product.paid &&  <Link to={`/payments/${_id}`}><button className='flex items-center p-1 rounded text-black bg-white gap-1 mt-2 text-sm'><MdPayment />Pay</button> </Link>
                            }

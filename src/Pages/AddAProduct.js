@@ -1,13 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../contexts/AuthProvider';
+import useSellerTik from '../hooks/useSellerTik';
 
 const AddAProduct = () => {
 
     const { user } = useContext(AuthContext);
 
-
+    const [getTik] = useSellerTik(user?.email)
+    
     let today = new Date();
     let hours = today.getHours()
     let date = today.getDate()
@@ -25,7 +27,6 @@ const AddAProduct = () => {
 
     const handleUpload = data => {
 
-        // console.log(data.photo);
 
         const formData = new FormData()
         formData.append('image', data.photo[0])
@@ -56,6 +57,7 @@ const AddAProduct = () => {
                     purchaseYear: data.purchaseYear,
                     sellingPrice: data.sellingPrice,
                     status: "available",
+                    tik: getTik
                 }
 
                 // console.log(imageData);
@@ -70,6 +72,7 @@ const AddAProduct = () => {
                 })
                     .then(res => res.json())
                     .then(mobiles => {
+                        console.log(mobiles);
                         toast.success('added successfully')
                     })
                     .catch((error) => {
