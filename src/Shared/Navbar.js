@@ -58,7 +58,7 @@ const Navbar = () => {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
                         </svg>
                     </li>
-                    <li><Link className="text-sm text-black font-bold hover:text-blue-500" to="/my-order">Personal</Link></li>
+                    <li><Link className="text-sm text-black font-bold hover:text-blue-500" to="/about">About</Link></li>
                 </ul>
 
                 {

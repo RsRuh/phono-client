@@ -184,7 +184,7 @@ const ModalForm = ({ productInfo }) => {
                                             </div>
                                             <div className="col-span-6">
                                                 <label className="mb-1 block text-sm text-gray-600" htmlFor="address">
-                                                    Address
+                                                    Meetup Location
                                                 </label>
 
                                                 <input

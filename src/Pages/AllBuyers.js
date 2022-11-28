@@ -20,7 +20,7 @@ const AllBuyers = () => {
         }
     })
 
-    console.log(buyers);
+    // console.log(buyers);
 
 
     return (

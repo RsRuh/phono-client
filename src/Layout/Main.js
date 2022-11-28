@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { HiMenuAlt3 } from "react-icons/hi";
 import { MdOutlineDashboard } from "react-icons/md";
-import { TbReportAnalytics } from "react-icons/tb";
-import { AiOutlineHeart, AiOutlineLogout, AiOutlineHome, AiOutlineOrderedList } from "react-icons/ai";
+import { FcAbout } from "react-icons/fc";
+import { AiOutlineLogout, AiOutlineHome, AiOutlineOrderedList } from "react-icons/ai";
 import { FiUserPlus } from "react-icons/fi";
 import { VscSignIn } from "react-icons/vsc";
 import { Link, Outlet, useLocation } from 'react-router-dom';
@@ -122,13 +122,13 @@ const Main = () => {
 
                     </Link>
                     <Link
-                        to='/personal'
+                        to='/about'
                         onClick={() => setOpen(!open)}
 
                         className={'group flex items-center text-sm  gap-3.5 font-medium p-2 hover:bg-gray-800 rounded-md'}
                     >
 
-                        <div><MdOutlineDashboard/></div>
+                        <div><FcAbout/></div>
                         <h2
                             style={{
                                 transitionDelay: '300ms',
@@ -136,7 +136,7 @@ const Main = () => {
                             className={`whitespace-pre duration-500 ${!open && "opacity-0 translate-x-28 overflow-hidden"
                                 }`}
                         >
-                            Personal
+                            About
                         </h2>
 
                     </Link>

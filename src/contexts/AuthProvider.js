@@ -44,7 +44,7 @@ const AuthProvider = ({ children }) => {
   // 5. Logout
   const logout = () => {
     setLoading(true)
-    localStorage.removeItem('aircnc-token')
+    localStorage.removeItem('accessToken')
     return signOut(auth)
   }
   useEffect(() => {

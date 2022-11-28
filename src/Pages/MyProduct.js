@@ -36,7 +36,7 @@ const MyProduct = () => {
             toast.success('Mobile deleted')
             refetch();
           })
-          .catch(err => console.log(err))
+          .catch(err => console.error(err))
          
     }
 
