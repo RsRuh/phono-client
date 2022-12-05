@@ -2,6 +2,8 @@
 
 Admin Email: admin@admin.com
 Pass: FakeMail@10
+
+[Server Link](https://github.com/RsRuh/phono-server)
  
 ## This is a best Selling Platform
  
