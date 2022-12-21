@@ -7,7 +7,8 @@ import { AuthContext } from '../contexts/AuthProvider';
 
 const MyProduct = () => {
     const { user } = useContext(AuthContext);
-
+    console.log(user);
+    
     const url = `http://localhost:5000/products?email=${user?.email}`;
 
     const { data: products = [], refetch } = useQuery({
